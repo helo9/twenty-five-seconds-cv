@@ -41,7 +41,7 @@
 \newcommand{\@mobile}{}
 \newcommand{\@email}{}
 \newcommand{\@birth}{}
-\newcommand{\@profilepic}{}
+\newcommand{\@profilepic}{alice}
 
 \newcommand{\@name}{\@firstname ~ \@familyname}
 
@@ -144,7 +144,7 @@
         \coordinate (PNW) at (current page.north west);
         \coordinate (PNE) at (current page.north east);
         \fill [\cvcolor, inner sep=0pt, outer sep=0pt] ($(PNW) + (\outermargin, -\outermargin)$) rectangle ($(PNE) -(\outermargin, \outermargin+\headerheight)$){};
-        \node[anchor=east, inner sep=0pt, outer sep=0pt] at ($(PNE) - (\outermargin+5mm, \outermargin+\headerheight/2)$) {\includegraphics[height=\headerheight]{alice}};
+        \node[anchor=east, inner sep=0pt, outer sep=0pt] at ($(PNE) - (\outermargin+5mm, \outermargin+\headerheight/2)$) {\includegraphics[height=\headerheight]{\@profilepic}};
     \end{tikzpicture}
     
     \begin{textblock*}{\textwidth}(\outermargin+5mm, \outermargin+5mm)
