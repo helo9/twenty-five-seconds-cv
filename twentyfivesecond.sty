@@ -1,0 +1,34 @@
+% Colors
+
+\definecolor{cvblue}{HTML}{0E5484}
+
+% Footer
+
+\newcommand{\makefooter}[1]{
+	\begin{tikzpicture}[remember picture, overlay]
+	\coordinate (PSW) at (current page.south west);
+	\coordinate (PSE) at (current page.south east);
+	\fill [\cvcolor, inner sep=0pt, outer sep=0pt] ($(PSW) + (\outermargin, \outermargin+\footheight)$) rectangle ($(PSE) +(-\outermargin, \outermargin)$){};
+	\end{tikzpicture}
+	
+	\begin{textblock*}{\paperwidth}(\outermargin+5mm, \paperheight-\outermargin-\footheight+5mm)
+		\noindent \color{white}
+		#1
+	\end{textblock*}
+}
+
+\newcommand{\@makeheader}[2]
+{
+	\begin{tikzpicture}[remember picture, overlay]
+	\coordinate (PNW) at (current page.north west);
+	\coordinate (PNE) at (current page.north east);
+	\fill [\cvcolor, inner sep=0pt, outer sep=0pt] ($(PNW) + (\outermargin, -\outermargin)$) rectangle ($(PNE) -(\outermargin, \outermargin+\headerheight)$){};
+	#1
+	\end{tikzpicture}
+	
+	\begin{textblock*}{\textwidth}(\outermargin+5mm, \outermargin+5mm)
+		\color{white}
+		%    %\vspace{1cm}
+		#2
+	\end{textblock*}%
+}

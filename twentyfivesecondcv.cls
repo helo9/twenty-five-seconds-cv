@@ -1,34 +1,19 @@
 \ProvidesClass{twentyfivesecondcv}[2019/09/17 CV class]
-\LoadClass{article}
+\LoadClass{twentyfiveseconds}
 \NeedsTeXFormat{LaTeX2e}
-
 
 % Packages
 
-\RequirePackage{xcolor}
-\RequirePackage{calc}
-\RequirePackage[sfdefault]{ClearSans}
 \RequirePackage{tabularx}
 \RequirePackage{marvosym}
-\RequirePackage{geometry}
-\RequirePackage{tikz}
-\RequirePackage[absolute, overlay]{textpos}
 \RequirePackage{fontawesome}
 \RequirePackage{etoolbox}
 \RequirePackage{titlesec}
-%\RequirePackage[all]{background}
 \RequirePackage{everypage}
-
-\usetikzlibrary{calc}
-
-% Colors
-
-\definecolor{cvblue}{HTML}{0E5484}
 
 % Defaults
 
 %% colors
-\newcommand{\cvcolor}{cvblue}
 \newcommand{\sectioncolor}{\cvcolor}
 
 %% user input
@@ -81,18 +66,6 @@
 
 \ProcessOptions\relax
 
-% Lengthes
-
-\newlength{\outermargin}
-\setlength{\outermargin}{15mm}
-\newlength{\headerheight}
-\setlength{\headerheight}{50mm}
-\newlength{\bodytop}
-\setlength{\bodytop}{\dimexpr(\outermargin+\headerheight+5mm)}
-\newlength{\footheight}
-\setlength{\footheight}{25mm}
-\newlength{\marginwidth}
-\setlength{\marginwidth}{25mm}
 
 %% textpos settings
 \setlength{\TPHorizModule}{1cm}
@@ -111,7 +84,6 @@
 }
 
 \pagestyle{empty}
-
 
 % Section Formatting
 
@@ -134,32 +106,21 @@
 %% quickfix for not accepted sectioncolor
 \newcommand{\cvsection}[1]{\section{\color{\sectioncolor} #1}}
 
-
-
 % Header
 
-\newcommand{\makeheader}
-{
-    \begin{tikzpicture}[remember picture, overlay]
-        \coordinate (PNW) at (current page.north west);
-        \coordinate (PNE) at (current page.north east);
-        \fill [\cvcolor, inner sep=0pt, outer sep=0pt] ($(PNW) + (\outermargin, -\outermargin)$) rectangle ($(PNE) -(\outermargin, \outermargin+\headerheight)$){};
-        \node[anchor=east, inner sep=0pt, outer sep=0pt] at ($(PNE) - (\outermargin+5mm, \outermargin+\headerheight/2)$) {\includegraphics[height=\headerheight]{\@profilepic}};
-    \end{tikzpicture}
-    
-    \begin{textblock*}{\textwidth}(\outermargin+5mm, \outermargin+5mm)
-    \color{white}
-%    %\vspace{1cm}
-    \noindent {\Huge \@name}\\
-    {\small \@birth}\\
-    \vspace{1cm}
-
-    \noindent \@addressstreet\\
-    \@addresscity\\
-    \Telefon ~ \@mobile\\
-    \Letter ~ \@email
-    %
-    \end{textblock*}%
+\newcommand{\makeheader}{
+	\@makeheader{\node[anchor=east, inner sep=0pt, outer sep=0pt] at ($(PNE) - (\outermargin+5mm, \outermargin+\headerheight/2)$) {\includegraphics[height=\headerheight]{\@profilepic}};}{%
+		\color{white}
+		%    %\vspace{1cm}
+		\noindent {\Huge \@name}\\
+		{\small \@birth}\\
+		\vspace{1cm}
+			
+		\noindent \@addressstreet\\
+		\@addresscity\\
+		\Telefon ~ \@mobile\\
+		\Letter ~ \@email
+	}
 }
 
 % Content definition
@@ -170,27 +131,22 @@
 %% cvline
 
 \newcommand{\cvline}[2]{%
+	\vspace{1mm}
 	\begin{tabular}[t]{@{}L{4cm}L{\textwidth-\marginwidth-4cm-15mm}@{}}%
 		#1 & #2 %
 	\end{tabular}\par%
+	\vspace{1mm}
 }
 
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
 \newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
 
-% Footer
 
-\newcommand{\makefooter}[1]{
-    \begin{tikzpicture}[remember picture, overlay]
-    \coordinate (PSW) at (current page.south west);
-    \coordinate (PSE) at (current page.south east);
-    \fill [\cvcolor, inner sep=0pt, outer sep=0pt] ($(PSW) + (\outermargin, \outermargin+\footheight)$) rectangle ($(PSE) +(-\outermargin, \outermargin)$){};
-    \end{tikzpicture}
+% Skill
 
-    \begin{textblock*}{\paperwidth}(\outermargin+5mm, \paperheight-\outermargin-\footheight+5mm)
-    \noindent \color{white}
-        #1
-    \end{textblock*}
+\newcommand{\skillrating}[1]{%
+	\foreach \x in {1,...,5}{%
+		\space{\ifnumgreater{\x}{#1}{\color{\cvcolor!45}}{}\faCircle}}
 }
 
