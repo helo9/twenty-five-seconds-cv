@@ -1,5 +1,5 @@
 \ProvidesClass{twentyfiveseconds}[2019/09/17 base class]
-\LoadClass{article}
+\LoadClass[a4paper]{article}
 
 \NeedsTeXFormat{LaTeX2e}
 
@@ -27,18 +27,6 @@
 \setlength{\footheight}{25mm}
 \newlength{\marginwidth}
 \setlength{\marginwidth}{25mm}
-
-% Format Page
-
-\geometry{%
-	top=\bodytop,%
-	left=\outermargin, %
-	right=\outermargin,
-	bottom=\outermargin+\footheight,
-	nohead,% no space for header
-	nofoot,% no space for footer
-	%showframe% show the page layout, only debugging purpose
-}
 
 % Colors
 

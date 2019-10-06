@@ -44,3 +44,19 @@
 % LENGTH
 
 \setlength{\headerheight}{35mm}
+
+% PAGE SETUP
+
+% Format Page
+
+\geometry{%
+	top=\bodytop,%
+	left=25mm, %
+	right=25mm,
+	bottom=10mm,
+	nohead,% no space for header
+	nofoot,% no space for footer
+	%showframe% show the page layout, only debugging purpose
+}
+
+\pagestyle{empty}
